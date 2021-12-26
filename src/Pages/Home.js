@@ -6,7 +6,6 @@ import Allposts from './Allposts';
 function Home(props) {
 
     const dispatch = useDispatch()
-
     const data = useSelector(getAllposts)
 
     useEffect(() => {

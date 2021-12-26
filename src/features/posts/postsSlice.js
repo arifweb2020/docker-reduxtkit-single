@@ -11,6 +11,16 @@ export const fetchAsyncPosts = createAsyncThunk(
     }
 );
 
+export const fetchAsyncSinglePost = createAsyncThunk(
+    "posts/fetchAsyncSinglePost",
+    async (id) => {
+        const res = await fetch(api + `/posts/${id}`)
+        const res1 = await res.json()
+        console.log(res1)
+        return res1;
+    }
+);
+
 const initialState = {
     posts: [],
     singlePost: {}
@@ -46,7 +56,11 @@ const postsSlice = createSlice({
         [fetchAsyncPosts.rejected]: () => {
           console.log("Rejected!");
         },
-       
+        [fetchAsyncSinglePost.fulfilled]: (state, { payload }) => {
+            console.log("Fetched Successfully!");
+            return { ...state, singlePost: payload };
+          },
+        
       },
 });
 
