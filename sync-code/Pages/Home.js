@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import { api } from '../Common/API';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAsyncPosts, getAllposts } from '../features/posts/postsSlice';
+import { allPosts, getAllposts } from '../features/posts/postsSlice';
 import Allposts from './Allposts';
 
 function Home(props) {
@@ -10,10 +11,14 @@ function Home(props) {
     const data = useSelector(getAllposts)
 
     useEffect(() => {
-        dispatch(fetchAsyncPosts())
-    }, [dispatch])
-
-
+        const dataFn = async () => {
+            const res = await fetch(api + "/posts")
+            const res1 = await res.json()
+            console.log(res1)
+            dispatch(allPosts(res1))
+        }
+        dataFn()
+    })
     return (
         <div>
             <h1>Home</h1>

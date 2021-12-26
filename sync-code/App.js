@@ -14,6 +14,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route  path="/postDetails/:id" component={Details} />
+
           </Switch>
         </div>
       </Router>
